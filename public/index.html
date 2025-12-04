@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🌊 Corais & Recifes - Mundo Subaquático</title>
+  <link rel="stylesheet" href="style.css">
+    <!-- Bibliotecas -->
+  <script defer src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.8.0/dist/tf.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+
+  <!-- Script principal -->
+  <script defer src="script.js"></script>
+</head>
+<body>
+
+  <!-- Cabeçalho -->
+  <header>
+    <div class="menu-icon" id="menu-btn">🐚</div>
+    <h1>🌊 Corais & Recifes 🌊</h1>
+  </header>
+
+  <!-- Menu lateral -->
+  <nav class="sidebar" id="sidebar">
+    <ul>
+      <li><a href="#inicio">Início</a></li>
+      <li><a href="#tipos">Tipos de Corais</a></li>
+      <li><a href="#curiosidades">Curiosidades</a></li>
+      <li><a href="#galeria">Galeria</a></li>
+      <li><a href="#ia">IA</a></li>
+      <li><a href="#chat">Chat</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section id="inicio">
+      <h2>Bem-vindo ao Mundo dos Corais 🌺</h2>
+      <p>
+        Os corais são pequenas criaturas marinhas que, juntas, constroem alguns dos ecossistemas mais ricos e coloridos do planeta:
+        os recifes de coral. Eles oferecem abrigo e alimento para mais de 25% de todas as espécies marinhas conhecidas.
+      </p>
+    </section>
+
+    <section id="tipos">
+      <h2>Tipos de Corais 🪸</h2>
+      <p>Existem dois grandes grupos de corais:</p>
+      <ul style="list-style:none; padding:0;">
+        <li>🌕 <b>Corais duros</b> — responsáveis pela estrutura dos recifes.</li>
+        <li>🌸 <b>Corais moles</b> — flexíveis e coloridos.</li>
+      </ul>
+    </section>
+
+    <section id="curiosidades">
+      <h2>Curiosidades Incríveis 🌈</h2>
+      <ul style="list-style:none; padding:0;">
+        <li>🐠 Os corais brilham no escuro sob luz ultravioleta.</li>
+        <li>🪸 Alguns crescem apenas 1 cm por ano.</li>
+        <li>🌊 Recifes protegem as costas da erosão.</li>
+        <li>🌏 O Recife de Belize é o segundo maior do mundo.</li>
+        <li>💙 Corais inspiram pesquisas médicas.</li>
+      </ul>
+    </section>
+
+    <section id="galeria">
+      <h2>Galeria Subaquática</h2>
+      <div class="gallery-container">
+        <img src="static/20251112_0952_Recife de Coral_simple_compose_01k9w1vb33fyp95pd1jqa8yhwm.png" alt="Recife de Coral">
+        <img src="static/20251112_0959_Vida Marinha Vibrante_simple_compose_01k9w28ezcfszv3z3v3ex7m3n5.png" alt="Peixes e Corais">
+        <img src="static/20251112_1003_Corais Vibrantes_simple_compose_01k9w2h597ezrvhymrjzt9ge5n.png" alt="Corais Coloridos">
+        <img src="static/20251112_1005_Tartaruga no Recife_simple_compose_01k9w2ptxyf1k9vap88d7sqjea.png" alt="Tartaruga no Recife">
+        <img src="static/20251112_1017_Recifes Vibrantes_simple_compose_01k9w3ad45f8gv3sjgn1chq1a3.png" alt="Peixes Tropicais">
+      </div>
+    </section>
+
+    <section class="ia-section" id="abrirIA">
+      <h2>🤖 IA de Reconhecimento</h2>
+      <p>Em breve, você poderá enviar uma imagem e a IA dirá qual tipo de coral foi encontrado!</p>
+      <button id="ia-btn">Ativar IA</button>
+    </section>
+
+    <section class="chat-section" id="btnAbrirChatbot">
+      <h2>💬 Chat-bot Subaquático</h2>
+      <p>Converse com nosso bot sobre o fundo do mar e descubra curiosidades!</p>
+      <button id="chat-btn">Abrir Chat</button>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Mundo Coral - Criado com 💙, curiosidade e muito neon.</p>
+  </footer>
+
+  <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+<df-messenger
+  intent="WELCOME"
+  chat-title="Robert"
+  agent-id="d396cafd-0d12-4f5a-bed2-ddbb355260d5"
+  language-code="pt-br"
+></df-messenger>
+
+  <!-- Modal da câmera (inicialmente escondido) -->
+  <div id="cameraModal" class="modal" aria-hidden="true" style="display:none;">
+    <div class="modal-content">
+      <button id="fecharModal" class="botao-fechar" title="Fechar">❌</button>
+      <h2 class="modal-title">Reconhecimento Facial</h2>
+      <div class="video-wrap">
+        <video id="video" autoplay muted playsinline></video>
+      </div>
+      <div class="controls">
+        <button id="tirarFoto" class="botao-foto" title="Tirar foto">📸</button>
+      </div>
+      <p id="modalStatus" class="modal-status">Aguardando...</p>
+      <canvas id="fotoCanvas" style="display:none;"></canvas>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>🌊 Resultado da Análise</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: radial-gradient(circle at center, #021024 40%, #00182f 100%);
+      color: #e0f7fa;
+      text-align: center;
+      padding: 40px 20px;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Bolhas animadas */
+    .bubble {
+      position: absolute;
+      bottom: -100px;
+      background: rgba(255, 255, 255, 0.25);
+      border-radius: 50%;
+      animation: rise 10s infinite ease-in;
+    }
+
+    @keyframes rise {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-110vh) scale(1.3); opacity: 0; }
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+      text-shadow: 0 0 15px #00ffff;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      text-shadow: 0 0 12px #00ffff;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1.3rem;
+      margin-bottom: 25px;
+    }
+
+    .card {
+      display: inline-block;
+      background: rgba(0, 20, 40, 0.8);
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 0 25px #00ffff;
+      margin-top: 20px;
+    }
+
+    .card img {
+      max-width: 350px;
+      width: 90%;
+      border-radius: 15px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 20px #00ffff;
+    }
+
+    button {
+      padding: 12px 22px;
+      background: linear-gradient(90deg, #00ffff, #0077ff);
+      border: none;
+      border-radius: 10px;
+      color: #021024;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 1.1rem;
+      box-shadow: 0 0 15px #00ffff;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 30px #00ffff;
+    }
+  </style>
+</head>
+<body>
+
+<script>
+  // Criar bolhas no fundo
+  for (let i = 0; i < 20; i++) {
+    const bubble = document.createElement("div");
+    bubble.classList.add("bubble");
+    bubble.style.width = `${Math.random() * 30 + 10}px`;
+    bubble.style.height = bubble.style.width;
+    bubble.style.left = `${Math.random() * 100}%`;
+    bubble.style.animationDuration = `${Math.random() * 8 + 5}s`;
+    document.body.appendChild(bubble);
+  }
+</script>
+
+<h1>🔍 Emoção Detectada</h1>
+<h2 id="emocaoTitle">Processando...</h2>
+<p id="confTitle"></p>
+
+<div class="card">
+  <img id="imagemEmocao" alt="Imagem relacionada à emoção" />
+  <button onclick="voltar()">Voltar</button>
+</div>
+
+<script>
+  // Imagens por emoção
+  const imagensPorEmocao = {
+    feliz: [
+      'static/mar_feliz/1.png',
+      'static/mar_feliz/2.png'
+    ],
+    triste: [
+      'static/mar_triste/3.png',
+      'static/mar_triste/4.png'
+    ],
+    neutro: [
+      'static/mar_neutro/5.png',
+      'static/mar_neutro/6.png'
+    ]
+  };
+
+  // Traduções do inglês para PT
+  const traducoes = {
+    happy: 'feliz',
+    sad: 'triste',
+    neutral: 'neutro',
+    angry: 'triste',
+    fearful: 'triste',
+    disgusted: 'triste',
+    surprised: 'feliz'
+  };
+
+  // Ler parâmetros
+  function getQueryParam(name) {
+    const params = new URLSearchParams(window.location.search);
+    return params.get(name);
+  }
+
+  const emocaoOriginal = getQueryParam('emocao') || 'neutral';
+  const conf = getQueryParam('conf') || '0';
+  const emocaoTraduzida = traducoes[emocaoOriginal] || 'neutro';
+
+  document.getElementById('emocaoTitle').innerText =
+    emocaoTraduzida.charAt(0).toUpperCase() + emocaoTraduzida.slice(1);
+
+  document.getElementById('confTitle').innerText = `Confiança: ${conf}%`;
+
+  function imagemAleatoria(lista) {
+    return lista[Math.floor(Math.random() * lista.length)];
+  }
+
+  // Escolher a imagem correta
+  const lista = imagensPorEmocao[emocaoTraduzida];
+
+  if (lista && lista.length > 0) {
+    document.getElementById('imagemEmocao').src = imagemAleatoria(lista);
+  } else {
+    document.getElementById('imagemEmocao').style.display = 'none';
+  }
+
+  // Voltar
+  function voltar() {
+    window.location.href = "index.html";
+  }
+</script>
+
+</body>
+</html>
